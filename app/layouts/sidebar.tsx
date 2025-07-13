@@ -7,7 +7,7 @@ import {
   useNavigation,
   useSubmit,
 } from "react-router";
-import { getContacts } from "../data";
+import { getContacts } from "../actions/contactAction";
 import type { Route } from "./+types/sidebar";
 
 export async function loader({ request }: Route.LoaderArgs) {

@@ -6,6 +6,7 @@
     "build": "react-router build",
     "db:generate": "dotenv -- drizzle-kit generate",
     "db:migrate": "dotenv -- drizzle-kit migrate",
+    "db:seed": "dotenv -- tsx database/seed.ts",
     "dev": "dotenv -- node server.js",
     "start": "node server.js",
     "typecheck": "react-router typegen && tsc -b"

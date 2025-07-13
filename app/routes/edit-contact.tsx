@@ -1,7 +1,7 @@
 import { Form, useNavigate, redirect } from "react-router";
 import type { Route } from "./+types/edit-contact";
 
-import { getContact, updateContact } from "../data";
+import { getContact, updateContact } from "../actions/contactAction";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const contact = await getContact(params.contactId);

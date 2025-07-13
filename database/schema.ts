@@ -1,7 +1,12 @@
-import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
-export const guestBook = pgTable("guestBook", {
+export const contacts = pgTable("contacts", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
+  first: text("first"),
+  last: text("last"),
+  avatar: text("avatar"),
+  twitter: varchar({ length: 255 }),
+  notes: text("notes"),
+  favorite: boolean("favorite").default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });

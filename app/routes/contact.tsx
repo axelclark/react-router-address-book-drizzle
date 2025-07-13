@@ -1,8 +1,8 @@
 import { Form, useFetcher } from "react-router";
-import { getContact, updateContact } from "../data";
+import { getContact, updateContact } from "../actions/contactAction";
 import type { Route } from "./+types/contact";
 
-import type { ContactRecord } from "../data";
+import type { ContactRecord } from "../actions/contactAction";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const contact = await getContact(params.contactId);
