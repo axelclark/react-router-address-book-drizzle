@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
+import { vi } from "vitest";
 import Contact from "../../app/routes/contact";
 
 vi.mock("../../app/actions/contactAction", () => ({
@@ -23,6 +24,7 @@ describe("Contact Component", () => {
     const Stub = createRoutesStub([
       {
         path: "/contact/:contactId",
+        // @ts-expect-error - Known issue with createRoutesStub and Route.ComponentProps in React Router v7
         Component: Contact,
         loader() {
           return { contact: mockContact };
@@ -46,6 +48,7 @@ describe("Contact Component", () => {
     const Stub = createRoutesStub([
       {
         path: "/contact/:contactId",
+        // @ts-expect-error - Known issue with createRoutesStub and Route.ComponentProps in React Router v7
         Component: Contact,
         loader() {
           return { contact: contactWithoutName };
@@ -65,6 +68,7 @@ describe("Contact Component", () => {
     const Stub = createRoutesStub([
       {
         path: "/contact/:contactId",
+        // @ts-expect-error - Known issue with createRoutesStub and Route.ComponentProps in React Router v7
         Component: Contact,
         loader() {
           return { contact: favoriteContact };
