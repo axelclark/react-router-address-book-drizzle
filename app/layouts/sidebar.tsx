@@ -8,17 +8,22 @@ import {
   useSubmit,
 } from "react-router";
 import { getContacts } from "../actions/contactAction";
+import { requireAuth } from "../lib/auth-utils";
+import { SignOutButton } from "../components/SignOutButton";
 import type { Route } from "./+types/sidebar";
 
 export async function loader({ request }: Route.LoaderArgs) {
+  // Require authentication for all routes using this layout
+  const session = await requireAuth(request);
+  
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
   const contacts = await getContacts(q);
-  return { contacts, q };
+  return { contacts, q, session };
 }
 
 export default function SidebarLayout({ loaderData }: Route.ComponentProps) {
-  const { contacts, q } = loaderData;
+  const { contacts, q, session } = loaderData;
   const navigation = useNavigation();
   const submit = useSubmit();
   const searching =
@@ -38,6 +43,16 @@ export default function SidebarLayout({ loaderData }: Route.ComponentProps) {
         <h1>
           <Link to="about">React Router Contacts</Link>
         </h1>
+        
+        {/* User info and sign out */}
+        <div style={{ padding: "1rem", borderBottom: "1px solid #ddd", marginBottom: "1rem" }}>
+          <div style={{ fontSize: "0.875rem", color: "#666", marginBottom: "0.5rem" }}>
+            Signed in as: <strong>{session.user.name}</strong>
+          </div>
+          <SignOutButton className="text-sm bg-gray-600 hover:bg-gray-700 text-white px-2 py-1 rounded">
+            Sign Out
+          </SignOutButton>
+        </div>
         <div>
           <Form
             id="search-form"

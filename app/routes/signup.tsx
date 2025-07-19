@@ -1,6 +1,14 @@
-import { Form, useNavigate } from "react-router";
+import { Form, Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { authClient } from "../lib/auth-client";
+import { redirectIfAuthenticated } from "../lib/auth-utils";
+import type { Route } from "./+types/signup";
+
+export async function loader({ request }: Route.LoaderArgs) {
+  // Redirect to home if already authenticated
+  await redirectIfAuthenticated(request);
+  return null;
+}
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -39,12 +47,30 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div 
+      className="bg-gray-50 px-4 py-12 sm:px-6 lg:px-8"
+      style={{
+        display: 'flex',
+        minHeight: '100vh',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
       <div className="w-full max-w-md space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Create your account
           </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Or{" "}
+            <Link
+              to="/signin"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              sign in to your existing account
+            </Link>
+          </p>
         </div>
         <Form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="-space-y-px rounded-md shadow-sm">
@@ -72,7 +98,7 @@ export default function SignUp() {
                 type="email"
                 autoComplete="email"
                 required
-                className="relative block w-full border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="relative block w-full rounded-none border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder="Email address"
               />
             </div>

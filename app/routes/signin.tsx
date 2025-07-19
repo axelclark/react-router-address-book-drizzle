@@ -1,6 +1,14 @@
 import { Form, Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { authClient } from "../lib/auth-client";
+import { redirectIfAuthenticated } from "../lib/auth-utils";
+import type { Route } from "./+types/signin";
+
+export async function loader({ request }: Route.LoaderArgs) {
+  // Redirect to home if already authenticated
+  await redirectIfAuthenticated(request);
+  return null;
+}
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -39,7 +47,16 @@ export default function SignIn() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div 
+      className="bg-gray-50 px-4 py-12 sm:px-6 lg:px-8"
+      style={{
+        display: 'flex',
+        minHeight: '100vh',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
       <div className="w-full max-w-md space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">

@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { vi } from "vitest";
 import Contact from "../../app/routes/contact";
+import { mockAuthenticatedUser, resetAuthMocks } from "../helpers/auth-helpers";
 
 vi.mock("../../app/actions/contactAction", () => ({
   getContact: vi.fn(),
@@ -20,6 +21,11 @@ const mockContact = {
 };
 
 describe("Contact Component", () => {
+  beforeEach(() => {
+    resetAuthMocks();
+    mockAuthenticatedUser();
+  });
+
   it("renders contact information correctly", async () => {
     const Stub = createRoutesStub([
       {
