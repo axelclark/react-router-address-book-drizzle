@@ -1,6 +1,15 @@
 import { Link } from "react-router";
+import { requireAuth } from "../lib/auth-utils";
+import type { Route } from "./+types/about";
 
-export default function About() {
+export async function loader({ request }: Route.LoaderArgs) {
+  // Require authentication for the about page
+  const session = await requireAuth(request);
+  return { session };
+}
+
+export default function About({ loaderData }: Route.ComponentProps) {
+  const { session } = loaderData;
   return (
     <div id="about">
       <Link to="/">← Go to demo</Link>
