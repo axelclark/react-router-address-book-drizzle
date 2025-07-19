@@ -19,6 +19,7 @@
   "dependencies": {
     "@react-router/express": "^7.5.3",
     "@react-router/node": "^7.5.3",
+    "better-auth": "^1.2.12",
     "compression": "^1.8.0",
     "drizzle-orm": "~0.36.3",
     "express": "^5.1.0",
@@ -38,6 +39,7 @@
     "@tailwindcss/vite": "^4.1.4",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/compression": "^1.7.5",
     "@types/express": "^5.0.1",
     "@types/express-serve-static-core": "^5.0.6",
