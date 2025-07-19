@@ -45,8 +45,8 @@ export default function SidebarLayout({ loaderData }: Route.ComponentProps) {
         </h1>
         
         {/* User info and sign out */}
-        <div style={{ padding: "1rem", borderBottom: "1px solid #ddd", marginBottom: "1rem" }}>
-          <div style={{ fontSize: "0.875rem", color: "#666", marginBottom: "0.5rem" }}>
+        <div className="p-4 border-b border-gray-300 mb-4">
+          <div className="text-sm text-gray-600 mb-2">
             Signed in as: <strong>{session.user.name}</strong>
           </div>
           <SignOutButton className="text-sm bg-gray-600 hover:bg-gray-700 text-white px-2 py-1 rounded">
